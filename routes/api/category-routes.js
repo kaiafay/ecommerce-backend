@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
   .then(category => {
     // if category doesn't exist, return 404 error
     if(!category) {
-      res.status(404).json({ message: 'No existing category with the given ID.' });
+      res.status(404).json({ message: 'No existing category with this given ID.' });
       return;
     }
     res.json(category);
@@ -32,16 +32,31 @@ router.get('/:id', (req, res) => {
   .catch(err => res.status(500).json(err));
 });
 
+// create a new category
 router.post('/', (req, res) => {
-  // create a new category
+  Category.create(req.body)
+  .then(newCategory => res.json(newCategory))
+  .catch(err => res.status(500).json(err));
 });
 
+// update a category by its `id` value
 router.put('/:id', (req, res) => {
-  // update a category by its `id` value
+  Category.update(req.body, {
+    where: {
+      id: req.params.id
+    }
+  })
+  .then(updatedCategory => {
+    if(!updatedCategory) {
+      res.status(404).json({ message: 'No existing category with this given ID.' })
+    }
+    res.json(updatedCategory);
+  })
+  .catch(err => res.status(500).json(err));
 });
 
 router.delete('/:id', (req, res) => {
-  // delete a category by its `id` value
+
 });
 
 module.exports = router;
