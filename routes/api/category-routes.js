@@ -15,7 +15,21 @@ router.get('/', (req, res) => {
 
 // find one category by its `id` value
 router.get('/:id', (req, res) => {
-
+  Category.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [Product]
+  })
+  .then(category => {
+    // if category doesn't exist, return 404 error
+    if(!category) {
+      res.status(404).json({ message: 'No existing category with the given ID.' });
+      return;
+    }
+    res.json(category);
+  })
+  .catch(err => res.status(500).json(err));
 });
 
 router.post('/', (req, res) => {
