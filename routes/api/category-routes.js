@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   Category.create(req.body)
   .then(newCategory => res.json(newCategory))
-  .catch(err => res.status(500).json(err));
+  .catch(err => res.status(400).json(err));
 });
 
 // update a category by its `id` value

@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   Tag.create(req.body)
   .then(newTag => res.json(newTag))
-  .catch(err => res.status(500).json(err));
+  .catch(err => res.status(400).json(err));
 });
 
 router.put('/:id', (req, res) => {
