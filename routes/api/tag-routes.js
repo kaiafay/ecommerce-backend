@@ -15,13 +15,30 @@ router.get('/', (req, res) => {
   .catch(err => res.status(500).json(err));
 });
 
+// find a single tag by its `id`
 router.get('/:id', (req, res) => {
-  // find a single tag by its `id`
-  // be sure to include its associated Product data
+  Tag.findOne({
+    where: {
+      id: req.params.id
+    },
+    include: [{
+      model: Product,
+      through: ProductTag
+    }]
+  })
+  .then(tag => {
+    if(!tag) {
+      res.status(404).json({ message: 'No existing tag with this given ID.' });
+      return
+    }
+    res.json(tag);
+  })
+  .catch(err => res.status(500).json(err));
 });
 
+// create a new tag
 router.post('/', (req, res) => {
-  // create a new tag
+
 });
 
 router.put('/:id', (req, res) => {
