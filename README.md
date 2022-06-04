@@ -15,7 +15,7 @@ Built With:
 5. Run `source db/schema.sql`.
 6. Exit MySQL by entering the command `quit`.
 7. Seed the database using the `npm run seed` command.
-8. 4. Enter the command `node index.js` to initiate the application. 
+8. Enter the command `node index.js` to initiate the application. 
 
 ## Demo
 Link to video demonstration: [E-commerce Backend Walkthrough](https://drive.google.com/file/d/1D78CbnuF8WIhMwA7K46OMcghh56p7hf4/view?usp=sharing)
